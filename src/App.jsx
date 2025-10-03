@@ -13,6 +13,9 @@ import Resume from './components/Resume/resume'
 import LearnAcademy from './components/Learnings/Learnings'
 import Connect from './components/Connect/Connect'
 import Community from './components/Community/Community'
+import CareerPath from './components/CareerPath/CareerPath'
+import SavedRoadmaps from './components/CareerPath/SavedRoadmaps'
+import Main from './components/Entrepreneurs/Main'
 function App() {
   return (
     <AuthProvider>
@@ -30,7 +33,9 @@ function App() {
           <Route path="/learnings" element={<LearnAcademy />} />
           <Route path="/connect" element={<Connect />} />
           <Route path="/community" element={<Community />} />
-          {/* <Route path="/learnings" element={<SkillUpPage />} /> */}
+          <Route path="/careerpath" element={<CareerPath />} />
+          <Route path="/career-path/saved" element={<SavedRoadmaps />} />
+          <Route path="/entrepreneurs" element={<Main />} />
           {/* <Route path="/learnings" element={<StitchDesign />} /> */}
         </Routes>
       </BrowserRouter>

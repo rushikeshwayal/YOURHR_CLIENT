@@ -1,52 +1,61 @@
+// src/components/Profile/Profile.jsx
 
+import React, { useState, useEffect } from 'react';
 import { useAuth } from "../Authentication/components/firebase/firebase";
-import LogOutBtn from "../Button/LogOutBtn";
-import ResumeManager from "../Resume/ResumeManager";
-function Profile() {
-  const { currentUser } = useAuth();
-  console.log(currentUser);
-  return (
-    <div>
-      <div className="absolute pt-5"><a className="ml-10 font-bold text-xl" href="/home">← Home</a></div>
-      <div className="profile-page min-h-screen bg-gray-50 py-8">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          {currentUser ? (
-            <div className="space-y-8">
-              {/* User Profile Card */}
-              <div className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center">
-                <img
-                  src={currentUser.photoURL}
-                  alt="Profile"
-                  className="w-32 h-32 rounded-full object-cover mb-4 shadow-lg"
-                />
-                <h1 className="text-2xl font-semibold mb-2">
-                  {currentUser.displayName || currentUser.email}
-                </h1>
-                <p className="text-gray-600 mb-4">{currentUser.email}</p>
-                <p className="text-gray-600 mb-6">{currentUser.phoneNumber}</p>
-                <div className="flex space-x-4">
-                  <LogOutBtn />
-                  <a href="/reset-password" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-                    Change Password
-                  </a>
-                </div>
-                <p className="font-bold mt-5 text-gray-600">
-                  Joined On: {new Date(currentUser.metadata.creationTime).toLocaleDateString()}
-                </p>
-              </div>
+import NavBarBlack from "../NavBar/NavToHomeBlack";
+import Footer from "../Footer/Footer";
 
-              {/* Resume Manager */}
-              <ResumeManager />
-            </div>
-          ) : (
-            <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-              <p className="text-gray-500 text-lg">No user is logged in</p>
-            </div>
-          )}
-        </div>
+// Import new profile components
+import ProfileSidebar from './ProfileSidebar';
+import UserProfileSection from './UserProfileSection';
+import UploadedJobsSection from './UploadedJobsSection';
+import MyCompanySection from './MyCompanySection'; // Placeholder for future
+import ResumeManager from '../Resume/ResumeManager'; // Assuming you want this in the 'My Profile' section
+
+export default function Profile() {
+  const { currentUser } = useAuth();
+  // Default to 'profile' view
+  const [activeSection, setActiveSection] = useState('profile');
+
+  if (!currentUser) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-slate-100 text-center">
+        <p className="text-xl text-slate-700">Please log in to view your profile.</p>
       </div>
+    );
+  }
+
+  return (
+    <div className="bg-slate-100 min-h-screen font-sans">
+      <NavBarBlack />
+      {/* Main content container with consistent padding and top margin */}
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-20">
+        <div className="flex flex-col md:flex-row md:gap-8">
+          {/* Profile Sidebar */}
+          <div className="md:w-1/4 lg:w-1/5 flex-shrink-0 mb-8 md:mb-0">
+            <ProfileSidebar activeSection={activeSection} setActiveSection={setActiveSection} />
+          </div>
+
+          {/* Main Content Area */}
+          <div className="flex-grow md:w-3/4 lg:w-4/5">
+            {/* The content will be rendered inside a single container for consistent styling */}
+            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+              {activeSection === 'profile' && (
+                <>
+                  <UserProfileSection currentUser={currentUser} />
+                  {/* Nesting ResumeManager inside the profile section for better flow */}
+                  {/* <div className="p-4 md:p-8 border-t border-slate-200">
+                    <ResumeManager />
+                  </div> */}
+                </>
+              )}
+              {activeSection === 'uploadedJobs' && <UploadedJobsSection currentUser={currentUser} />}
+              {activeSection === 'myCompany' && <MyCompanySection />}
+            </div>
+          </div>
+        </div>
+      </main>
+      <Footer />
     </div>
   );
 }
-
-export default Profile;

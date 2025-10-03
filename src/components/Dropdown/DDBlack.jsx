@@ -1,5 +1,5 @@
-import DropDownpng from '../../assets/icons8-sort-down-30.png'
 import { useState } from 'react';
+import { IoMdArrowDropdown } from "react-icons/io";
 function DropDownBlack() {
 
     const [open, setOpen] = useState(false);
@@ -11,10 +11,12 @@ function DropDownBlack() {
             onMouseLeave={() => setOpen(false)}
         >
             <button
-                className="w-44 flex justify-between items-center px-4 py-2 rounded-lg transition duration-300 hover:bg-black hover:text-white"
+                className="z-50 w-44 flex justify-between items-center px-4 py-2 rounded-lg transition duration-300 hover:bg-black hover:text-white"
             >
                 Academy
-                <img className="h-5 ml-2" src={DropDownpng} alt="Dropdown Icon" />
+                {/* <img className="h-5 ml-2" src={DropDownpng} alt="Dropdown Icon" />
+                 */}
+                <IoMdArrowDropdown />
             </button>
 
             {/* Dropdown menu */}
@@ -26,7 +28,7 @@ function DropDownBlack() {
                         <a className="block text-right" href="/learnings">Learnings</a>
                     </li>
                     <li className="rounded-lg px-4 py-2 hover:bg-black hover:text-white transition duration-300">
-                        <a className="block text-right" href="/connect">Connect</a>
+                        <a className="block text-right" href="/connect">Work With Coach</a>
                     </li>
                     <li className="rounded-lg px-4 py-2 hover:bg-black hover:text-white transition duration-300">
                         <a className="block text-right" href="/community">Community</a>

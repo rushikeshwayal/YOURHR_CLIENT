@@ -154,7 +154,7 @@ export default function MessageForm({ channelId, onMessageSent, accessToken, cur
                     onChange={handleFileSelect}
                     accept="image/*,video/*,.pdf,.doc,.docx,.xls,.xlsx,.txt"
                 />
-                <button
+                {/* <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
                     disabled={isSending}
@@ -162,7 +162,7 @@ export default function MessageForm({ channelId, onMessageSent, accessToken, cur
                     title="Attach file"
                 >
                     <PaperclipIcon />
-                </button>
+                </button> */}
 
                 <input
                     type="text"
