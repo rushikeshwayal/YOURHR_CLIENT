@@ -6,7 +6,7 @@ import MessageForm from "./MessageForm";
 import MediaViewerModal from "./MediaViewerModal";
 import { useAuth } from "../Authentication/components/firebase/firebase";
 import NavToHomeBlack from "../NavBar/NavToHomeBlack";
-import { FiHash } from "react-icons/fi";
+import { HiMiniUserGroup } from "react-icons/hi2";
 import { BsChatDots } from "react-icons/bs";
 
 export default function Community() {
@@ -63,17 +63,32 @@ export default function Community() {
 
                     {/* Channel Header */}
                     {selectedChannel && (
-                        <div className="h-20 px-8 flex items-center border-b border-slate-200 bg-white/70 backdrop-blur-lg shadow-md rounded-b-2xl z-10">
-                            <h2 className="text-2xl font-bold text-blue-700 flex items-center gap-2 drop-shadow">
-                                <FiHash className="text-blue-500 text-2xl" />
-                                {selectedChannel.name}
-                            </h2>
-                            <span className="ml-4 text-gray-500 text-sm italic">
-                                {selectedChannel.description}
-                            </span>
+                        <div className="h-24 px-8 flex items-center justify-between border-b border-slate-200 
+                  bg-gradient-to-r from-blue-600/80 to-blue-400/70 
+                  backdrop-blur-md shadow-md z-10">
+
+                            {/* Left side: Icon + channel info */}
+                            <div className="flex items-center gap-4">
+                                <div className="bg-white/90 p-2 rounded-xl shadow">
+                                    <HiMiniUserGroup className="text-blue-600 text-3xl" />
+                                </div>
+                                <div className="flex flex-col">
+                                    <h2 className="text-xl font-bold text-white drop-shadow-sm">
+                                        {selectedChannel.name}
+                                    </h2>
+                                    <span className="text-sm text-blue-100 italic truncate max-w-[300px]">
+                                        {selectedChannel.description || "No description available"}
+                                    </span>
+                                </div>
+                            </div>
+
+                            {/* Right side: Placeholder for members */}
+                            <div className="flex items-center gap-2 bg-white/20 px-3 py-1 rounded-full">
+                                <span className="h-2 w-2 rounded-full bg-green-400 animate-pulse"></span>
+                                <span className="text-white text-sm font-medium">24 members online</span>
+                            </div>
                         </div>
                     )}
-
                     {/* Messages Area */}
                     <div className="flex-1 flex flex-col overflow-hidden bg-white/70 rounded-2xl shadow-lg m-4 border border-slate-200 backdrop-blur-sm">
                         {selectedChannel ? (

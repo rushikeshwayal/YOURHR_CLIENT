@@ -160,6 +160,7 @@ export default function JobDetails() {
       const userData = await userRes.json();
       const userId = userData.id;
       const res = await fetch(`http://localhost:8000/jobs/skill-gaps/${jobId}/${userId}`);
+      console.log(res);
       if (!res.ok) throw new Error("Failed to fetch skill gaps");
       const data = await res.json();
       setSkillGaps(Array.isArray(data) && data.length > 0 && data[0].skill_gap ? data : null);
