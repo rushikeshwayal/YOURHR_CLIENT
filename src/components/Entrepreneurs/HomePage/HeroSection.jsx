@@ -18,12 +18,16 @@ const HeroSection = () => (
                 InnovateHub is a vibrant community where entrepreneurs connect, share insights, and collaborate to achieve their business goals. Join us to accelerate your growth and build lasting relationships.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
-                <button className="rounded-lg bg-primary px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/20 transition-transform duration-300 hover:scale-105 hover:bg-primary/90">
-                    Create Your Company
-                </button>
-                <button className="rounded-lg bg-slate-800/70 px-6 py-3 text-base font-semibold text-slate-200 shadow-md transition-colors duration-300 hover:bg-slate-700">
-                    Explore Companies
-                </button>
+                <a href="/create-company">
+                    <button className="rounded-lg bg-primary px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/20 transition-transform duration-300 hover:scale-105 hover:bg-primary/90">
+                        Create Your Company
+                    </button>
+                </a>
+                <a href="/explore">
+                    <button className="rounded-lg bg-slate-800/70 px-6 py-3 text-base font-semibold text-slate-200 shadow-md transition-colors duration-300 hover:bg-slate-700">
+                        Explore Companies
+                    </button>
+                </a>
             </div>
         </div>
     </section>
