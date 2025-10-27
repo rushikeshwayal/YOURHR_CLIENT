@@ -13,8 +13,10 @@ const NavBar = () => {
 
     const navLinks = [
         { href: "/explore", text: "Explore" },
+        { href: "/create-company", text: "Create Company" },
         { href: "/my-company", text: "My Company" },
         { href: "/about", text: "About Us" },
+        { href: "/contact", text: "Contact" },
     ];
 
     return (
@@ -22,6 +24,10 @@ const NavBar = () => {
             <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
                 {/* Brand Logo */}
                 <NavLink to="/home" className="font-bold text-2xl text-white flex items-center gap-2">
+                    {/* <svg className="h-7 w-7 text-indigo-500" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path></svg> */}
+                    TalentVerse
+                </NavLink>
+                <NavLink to="/entrepreneurs" className="font-bold text-2xl text-white flex items-center gap-2">
                     <svg className="h-7 w-7 text-indigo-500" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path></svg>
                     TalentVerse.Grow
                 </NavLink>

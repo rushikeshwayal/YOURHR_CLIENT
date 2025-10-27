@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const ShowcaseCard = ({ logo, title, tagline, description, tagColor }) => (
+const ShowcaseCard = ({ logo, title, tagline, description, website }) => (
     <div className="group relative rounded-xl border border-slate-800 bg-slate-800/20 p-6 shadow-lg transition-all duration-300 hover:border-indigo-500/50 hover:bg-slate-800/50">
         {/* Glow effect on hover */}
         <div
@@ -20,26 +20,62 @@ const ShowcaseCard = ({ logo, title, tagline, description, tagColor }) => (
 
             <div className="flex-grow">
                 <h3 className="text-lg font-bold text-white">{title}</h3>
-                <p className={`mt-1 text-sm font-medium ${tagColor}`}>{tagline}</p>
-                <p className="mt-3 text-sm text-slate-400 h-10">{description}</p>
+                <p className="mt-1 text-sm font-medium text-emerald-400">{tagline}</p>
+                {/* CHANGED: Added min-h-[2.5rem] (same as h-10) and line-clamp-2.
+                  This ensures all cards have the same description height, aligning the buttons.
+                */}
+                <p className="mt-3 text-sm text-slate-400 min-h-[2.5rem] line-clamp-2">{description}</p>
             </div>
 
             <div className="mt-6 flex items-center justify-between">
-                <a className="text-sm font-semibold text-indigo-400 hover:text-indigo-300 transition" href="#">Visit Website</a>
+                <a className="text-sm font-semibold text-indigo-400 hover:text-indigo-300 transition" href={website} target="_blank" rel="noopener noreferrer">
+                    Visit Website
+                </a>
                 <button className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-transform duration-300 hover:scale-105 hover:bg-indigo-500 focus-visible:outline-indigo-400">
                     Connect
-                </button>
+                    _         </button>
             </div>
         </div>
     </div>
 );
 
 const ShowcaseSection = () => {
-    const showcases = [
-        { logo: 'https://images.pexels.com/photos/1595385/pexels-photo-1595385.jpeg', title: 'TechGenius Solutions', tagline: 'Revolutionizing software development', description: 'Cutting-edge AI solutions to streamline your workflows.', tagColor: 'text-emerald-400' },
-        { logo: 'https://images.pexels.com/photos/380769/pexels-photo-380769.jpeg', title: 'EcoStyle Living', tagline: 'Sustainable products for a greener lifestyle', description: 'Mindfully crafted goods for a conscious and eco-friendly home.', tagColor: 'text-emerald-400' },
-        { logo: 'https://images.pexels.com/photos/1015568/pexels-photo-1015568.jpeg', title: 'HealthFirst Innovations', tagline: 'Transforming healthcare with innovative tech', description: 'Developing medical devices that improve patient outcomes.', tagColor: 'text-emerald-400' }
-    ];
+    // ... (rest of the component is unchanged) ...
+    // (No changes to the rest of the file)
+    const [companies, setCompanies] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchCompanies = async () => {
+            try {
+                const response = await fetch('http://localhost:8000/companies/get/companies');
+                const data = await response.json();
+                // Take only first 3 companies
+                const firstThree = data.slice(0, 3).map(company => ({
+                    logo: company.logo_url || company.ceo_image_url || '',
+                    title: company.name,
+                    tagline: company.mission || company.industry || 'Leading in innovation',
+                    description: company.description || 'No description available',
+                    website: company.website || '#'
+                }));
+                setCompanies(firstThree);
+            } catch (error) {
+                console.error("Error fetching companies:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCompanies();
+    }, []);
+
+    if (loading) {
+        return (
+            <section className="py-16 sm:py-24 bg-black text-white text-center">
+                Loading companies...
+            </section>
+        );
+    }
 
     return (
         <section className="py-16 sm:py-24 bg-black border-y border-slate-800">
@@ -52,13 +88,12 @@ const ShowcaseSection = () => {
                         Meet the brilliant minds building the future.
                     </p>
                 </div>
-                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                    {showcases.map(item => <ShowcaseCard key={item.title} {...item} />)}
+                _ <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    {companies.map(item => <ShowcaseCard key={item.title} {...item} />)}
                 </div>
-            </div>
+                _ </div>
         </section>
     );
 };
 
 export default ShowcaseSection;
-

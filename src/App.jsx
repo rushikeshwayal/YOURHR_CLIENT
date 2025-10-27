@@ -16,6 +16,14 @@ import Community from './components/Community/Community'
 import CareerPath from './components/CareerPath/CareerPath'
 import SavedRoadmaps from './components/CareerPath/SavedRoadmaps'
 import Main from './components/Entrepreneurs/Main'
+import ExploreSection from './components/Entrepreneurs/Explore/Explore';
+import CompanyDetailPage from './components/Entrepreneurs/Explore/CompanyDetailPage'
+import JobDetailPage from './components/Entrepreneurs/Explore/JobDetailPage';
+import CreateCompanyPage from './components/Entrepreneurs/CreateCompany/CreateCompanyPage';
+import MyCompaniesPage from './components/Entrepreneurs/MyCompony/MyCompaniesPage';
+import ContactUsPage from './components/Entrepreneurs/Contact_US'
+import AboutUsPage from './components/Entrepreneurs/About_US'
+
 function App() {
   return (
     <AuthProvider>
@@ -36,7 +44,13 @@ function App() {
           <Route path="/careerpath" element={<CareerPath />} />
           <Route path="/career-path/saved" element={<SavedRoadmaps />} />
           <Route path="/entrepreneurs" element={<Main />} />
-          {/* <Route path="/learnings" element={<StitchDesign />} /> */}
+          <Route path="/explore" element={<ExploreSection />} />
+          <Route path="/company/:id" element={<CompanyDetailPage />} />
+          <Route path="/company-job/:id" element={<JobDetailPage />} />
+          <Route path="/create-company" element={<CreateCompanyPage />} />
+          <Route path="/my-company" element={<MyCompaniesPage />} />
+          <Route path="/contact" element={<ContactUsPage />} />
+          <Route path="/about" element={<AboutUsPage />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

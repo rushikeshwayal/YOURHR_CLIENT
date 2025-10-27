@@ -27,13 +27,13 @@ const ProfileSidebar = ({ activeSection, setActiveSection }) => {
                     <FiBriefcase className="h-5 w-5 mr-3 flex-shrink-0" />
                     <span>Posted Jobs</span>
                 </button>
-                <button
+                {/* <button
                     onClick={() => setActiveSection('myCompany')}
                     className={linkClasses('myCompany')}
                 >
                     <FiLayers className="h-5 w-5 mr-3 flex-shrink-0" />
                     <span>My Company</span>
-                </button>
+                </button> */}
             </nav>
         </aside>
     );
